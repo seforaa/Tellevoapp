@@ -1,0 +1,16 @@
+<ion-content [fullscreen]="true">
+  <p>
+    <mat-toolbar color="color">
+      <span>Te Llevo APP</span>
+    </mat-toolbar>
+  </p>
+  <div id="container">
+  <h1>Restablecer contraseña</h1>
+  <mat-form-field>
+    <mat-label>Ingresa tu usuario</mat-label>
+    <input [(ngModel)]="user" matInput>
+  </mat-form-field>
+  <br>
+  <ion-button (click)="ingresar()" color="color" fill="outline"  [routerLink]="['/home/:user']">Restablecer contraseña</ion-button>
+  </div>
+</ion-content>

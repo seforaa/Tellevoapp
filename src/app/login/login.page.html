@@ -1,0 +1,34 @@
+<ion-content [fullscreen]="true">
+  <p>
+    <mat-toolbar color="color">
+      <span>Te Llevo APP</span>
+    </mat-toolbar>
+  </p>
+  <div id="container">
+  <h1>Login</h1>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <mat-form-field class="mat">
+          <mat-label>Ingresa tu usuario</mat-label>
+          <input matInput [(ngModel)]="user">
+        </mat-form-field>
+      </ion-col>
+      <ion-col>
+        <mat-form-field class="mat">
+          <mat-label>Ingresa tu contraseña</mat-label>
+          <input matInput [(ngModel)]="pass" [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <br>
+  <ion-button fill="outline" color="color" (click)="ingresar()" [routerLink]="['/home']">Ingresar</ion-button>
+  <br>
+  <br>
+  <a fill="outline" color="color" [routerLink]="['/restablecer']">¿Olvidaste tu contraseña?</a>
+  </div>
+</ion-content>
