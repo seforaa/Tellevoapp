@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,20 +7,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage{
+  user = {
+    username :  "",
+    password :  ""
+  }
   hide = true;
-  user : string ='';
-  pass : string =''; 
+  
 
   constructor(private router: Router) {}
 
   ingresar() {
-    this.router.navigate(['/home', this.user]);
-    this.limpiar()
+    let navegationExtras: NavigationExtras = {
+      state: {
+        user: this.user
+      }
+    }
+    this.router.navigate(['/home'], navegationExtras)
   }
 
 
   limpiar() {
-    this.user = '';
-    this.pass = '';
+    this.user.username = '';
+    this.user.password = '';
   }
 }
