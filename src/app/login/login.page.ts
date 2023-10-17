@@ -24,10 +24,4 @@ export class LoginPage{
     }
     this.router.navigate(['/home'], navegationExtras)
   }
-
-
-  limpiar() {
-    this.user.username = '';
-    this.user.password = '';
-  }
 }
