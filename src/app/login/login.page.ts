@@ -17,6 +17,7 @@ export class LoginPage{
   constructor(private router: Router) {}
 
   ingresar() {
+    localStorage.setItem('ingresado','true');
     let navegationExtras: NavigationExtras = {
       state: {
         user: this.user

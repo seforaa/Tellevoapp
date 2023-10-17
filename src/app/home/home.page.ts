@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute, RouterLinkWithHref} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +18,10 @@ export class HomePage {
       this.user = this.state.user
       console.log(this.user);
     })
+  }
+  Salir(){
+    localStorage.removeItem('ingresado')
+    this.router.navigate(['/login']);
   }
 
 
