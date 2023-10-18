@@ -24,6 +24,12 @@ const routes: Routes = [
     loadChildren: () => import('./restablecer/restablecer.module').then( m => m.RestablecerPageModule),
     canActivate: [NoGuard]
   },
+  {
+    path: '**',
+    loadChildren: () => import('./notfound/notfound.module').then( m => m.NotfoundPageModule)
+  },
+  
+
 ];
 
 @NgModule({
