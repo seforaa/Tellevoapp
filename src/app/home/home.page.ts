@@ -19,5 +19,9 @@ export class HomePage {
       console.log(this.user);
     })
   }
+  salir(){
+    localStorage.removeItem('ingresado');
+    this.router.navigate(['/login']);
+  }
 
 }
