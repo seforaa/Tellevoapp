@@ -11,13 +11,13 @@
       <ion-col>
         <mat-form-field class="mat">
           <mat-label>Ingresa tu usuario</mat-label>
-          <input matInput [(ngModel)]="user.username">
+          <input matInput [(ngModel)]="credentials.username">
         </mat-form-field>
       </ion-col>
       <ion-col>
         <mat-form-field class="mat">
           <mat-label>Ingresa tu contraseña</mat-label>
-          <input matInput [(ngModel)]="user.password" [type]="hide ? 'password' : 'text'">
+          <input matInput [(ngModel)]="credentials.password" [type]="hide ? 'password' : 'text'">
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
@@ -26,7 +26,7 @@
     </ion-row>
   </ion-grid>
   <br>
-  <ion-button fill="outline" color="color" (click)="ingresar()" >Ingresar</ion-button>
+  <ion-button fill="outline" color="color" (click)="entrar()" >Ingresar</ion-button>
   <br>
   <br>
   <a fill="outline" color="color" [routerLink]="['/restablecer']">¿Olvidaste tu contraseña?</a>

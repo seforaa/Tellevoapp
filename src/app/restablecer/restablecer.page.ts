@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 export class RestablecerPage implements OnInit {
   hide = true;
   user : string ='';
-  public alertButtons = ['OK'];
 
   constructor(private router: Router) { }
 
@@ -26,7 +25,5 @@ export class RestablecerPage implements OnInit {
   limpiar() {
     this.user = '';
   }
-  
-  
 
 }

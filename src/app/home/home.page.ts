@@ -12,16 +12,19 @@ export class HomePage {
   user: any;
  
 
-  constructor(private activeroute: ActivatedRoute, private router: Router) {
+  constructor( private activeroute: ActivatedRoute, private router: Router) {
     this.activeroute.queryParams.subscribe(params => {
       this.state = this.router.getCurrentNavigation()?.extras.state;
       this.user = this.state.user
       console.log(this.user);
-    })
+    });
   }
+
+  
   salir(){
     localStorage.removeItem('ingresado');
     this.router.navigate(['/login']);
   }
 
+  
 }
