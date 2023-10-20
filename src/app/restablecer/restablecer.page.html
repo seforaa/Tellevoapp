@@ -11,6 +11,12 @@
     <input [(ngModel)]="user" matInput>
   </mat-form-field>
   <br>
-  <ion-button color="color" fill="outline" [routerLink]="['/login']">Restablecer contraseña</ion-button>
-  </div>
+  <ion-button color= "color" fill="outline" [routerLink]="['/login']" id="present-alert">Restablecer contraseña</ion-button>
+<ion-alert
+  trigger="present-alert"
+  message="Se a enviado un mensaje para restablecer contraseña"
+  [buttons]="alertButtons"
+></ion-alert>
+
+</div>
 </ion-content>

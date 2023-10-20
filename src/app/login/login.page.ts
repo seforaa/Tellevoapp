@@ -15,6 +15,7 @@ export class LoginPage{
   
 
   constructor(private router: Router) {}
+  
 
   ingresar() {
     localStorage.setItem('ingresado','true');
@@ -26,3 +27,5 @@ export class LoginPage{
     this.router.navigate(['/home'], navegationExtras)
   }
 }
+
+
