@@ -9,14 +9,14 @@ import { Router, ActivatedRoute, RouterLinkWithHref} from '@angular/router';
 export class HomePage {
 
   state: any;
-  user: any;
+  credentials: any;
  
 
   constructor( private activeroute: ActivatedRoute, private router: Router) {
     this.activeroute.queryParams.subscribe(params => {
       this.state = this.router.getCurrentNavigation()?.extras.state;
-      this.user = this.state.user
-      console.log(this.user);
+      this.credentials = this.state.credentials
+      console.log(this.credentials);
     });
   }
 

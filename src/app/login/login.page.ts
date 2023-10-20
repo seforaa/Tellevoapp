@@ -15,6 +15,7 @@ export class LoginPage{
     username :  "",
     password :  ""
   }
+ 
   hide = true;
   
   users : any = [];
@@ -33,11 +34,10 @@ export class LoginPage{
     localStorage.setItem('ingresado','true');
     let navegationExtras: NavigationExtras = {
       state: {
-        user: this.credentials
+        credentials: this.credentials
       }
     }
     this.router.navigate(['/home'], navegationExtras)
-
     
   }
 
@@ -56,11 +56,11 @@ export class LoginPage{
         localStorage.setItem('ingresado','true');
         let navegationExtras: NavigationExtras = {
           state: {
-            user: this.credentials.username
+            credentials: this.credentials
           }
-    }
+        }
         this.router.navigate(['/home'], navegationExtras)
-          console.log("correcto");
+        console.log("correcto");
         }
     }
   }
