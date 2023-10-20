@@ -1,0 +1,16 @@
+{
+    "data":[
+        {
+            "patente": "ABC123",
+            "duenno": "Rodrigo Lopez",
+            "salida":"17:00",
+            "destino":"Maipu"
+        },
+        {
+            "patente": "123ABC",
+            "duenno": "Manuel Silva",
+            "salida":"13:00",
+            "destino":"Ñuñoa"
+        }
+    ]
+}

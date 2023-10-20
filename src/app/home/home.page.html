@@ -5,9 +5,28 @@
       <span>Te Llevo APP</span>
     </mat-toolbar>
   </p>
-  <div id="container">
-    <h1>Bienvenid@ {{credentials.username}}</h1>
+  <div class="container">
+  <ion-grid class="ion-text-center">
+    <ion-row style="text-align: center;" class="ion-text-center">
+    <h1 style="text-align: center;" >Bienvenid@ {{credentials.username}}</h1>
     <br>
-    <ion-button fill="outline" color="color" (click)="salir()" >Salir</ion-button>
+    </ion-row>
+    <ion-row class="ion-text-center" *ngFor="let auto of autos">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Dueño: {{ auto.duenno }}</ion-card-title>
+          <ion-card-subtitle>Patente {{ auto.patente }} - Destino {{ auto.destino }}</ion-card-subtitle>
+        </ion-card-header>
+      
+        <ion-card-content>
+          <ion-card-subtitle>Salida: {{ auto.salida }}</ion-card-subtitle>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+    <ion-row class="ion-text-center">
+      
+    <ion-button class="ion-text-center" style="text-align: center;" fill="outline" color="color" (click)="salir()" >Salir</ion-button>
+    </ion-row>
+  </ion-grid>
   </div>
 </ion-content>
