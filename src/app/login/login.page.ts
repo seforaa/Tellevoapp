@@ -14,6 +14,9 @@ export class LoginPage{
     username :  "",
     password :  ""
   }
+
+  
+  mostrarError: boolean = false;
  
   hide = true;
   
@@ -79,6 +82,7 @@ export class LoginPage{
     for(const usuario of this.usuarios){
       if(usuario.user===this.credentials.username && usuario.password === this.credentials.password){
         localStorage.setItem('ingresado','true');
+        this.mostrarError = false;
         let navegationExtras: NavigationExtras = {
           state: {
             credentials: this.credentials
@@ -86,7 +90,13 @@ export class LoginPage{
         }
         this.router.navigate(['/home'], navegationExtras)
         console.log("correcto");
+        
+        this.credentials.username = '';
+        this.credentials.password = '';
         }
+      else{
+        this.mostrarError = true;
+      }
     }
   }
 }

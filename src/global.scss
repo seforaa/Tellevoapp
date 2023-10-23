@@ -24,3 +24,11 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+.centered-container {
+    display: flex;
+    flex-direction: column; /* Para apilar verticalmente las etiquetas */
+    justify-content: center;
+    align-items: center;
+    height: 70vh; /* Ajusta la altura según tus necesidades */
+  }

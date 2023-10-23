@@ -44,6 +44,7 @@ export class HomePage {
   
   salir(){
     localStorage.removeItem('ingresado');
+    this.credentials = null;
     this.router.navigate(['/login']);
   }
 
