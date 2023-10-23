@@ -91,8 +91,7 @@ export class LoginPage{
         this.router.navigate(['/home'], navegationExtras)
         console.log("correcto");
         
-        this.credentials.username = '';
-        this.credentials.password = '';
+        
         }
       else{
         this.mostrarError = true;
