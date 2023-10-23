@@ -17,9 +17,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<any> { 
+  getUsuarios(): Observable<any> { 
     return this.http.get(this.apiURL + 'lista_usuarios/').
     pipe(retry(10)); 
+  }
+
+  getAutos():Observable<any> {
+    return this.http.get(this.apiURL+'lista_autos/').
+    pipe(retry(10))
   }
 
   Ingresado(): boolean {

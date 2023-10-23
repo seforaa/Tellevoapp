@@ -17,12 +17,16 @@ export class LoginPage{
  
   hide = true;
   
-  users : any = [];
+  usuarios : any = [];
+  autos : any = [];
+
+
 
   constructor(private router: Router, private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit(){
-    this.LoadUsers()
+    this.cargaUsuarios()
+    this.cargaAutos()
   }
 
   ingresar() {
@@ -44,11 +48,24 @@ export class LoginPage{
     )
   }
 
-  LoadUsers(){
-    this.authService.getUsers().subscribe(
+  cargaUsuarios(){
+    this.authService.getUsuarios().subscribe(
       (res)=>{
         console.log(res);
-        this.users = res;
+        this.usuarios = res;
+      }
+      ,
+      (error)=>{
+        console.log(error);
+      }
+    )
+  }
+
+  cargaAutos(){
+    this.authService.getAutos().subscribe(
+      (res)=>{
+        console.log(res);
+        this.autos = res;
       }
       ,
       (error)=>{
@@ -59,7 +76,7 @@ export class LoginPage{
 
   
   entrar(){
-    for(const usuario of this.users){
+    for(const usuario of this.usuarios){
       if(usuario.user===this.credentials.username && usuario.password === this.credentials.password){
         localStorage.setItem('ingresado','true');
         let navegationExtras: NavigationExtras = {
