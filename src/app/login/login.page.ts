@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -19,19 +18,17 @@ export class LoginPage {
   }
 
   hide = true;
-
+  usuarios : any = [];
+  autos : any = [];
   users: any = [];
   loginerror: boolean = false;
   loginvacio: boolean = false;
 
   constructor(private router: Router, private http: HttpClient, private authService: AuthService) { }
 
-  ngOnInit() {
-    this.getUsers().subscribe(res => {
-      console.log("Res", res)
-      this.users = res;
-      console.log("hola", this.users)
-    });
+  ngOnInit(){
+    this.cargaUsuarios()
+    this.cargaAutos()
   }
 
   ionViewWillEnter() {
@@ -44,19 +41,45 @@ export class LoginPage {
     this.loginvacio = false;
   }
 
-  getUsers() {
-    return this.http.get("assets/files/db.json").pipe(
-      map((res: any) => {
-        return res.data;
-      })
+  login(){
+    return this.http.get("http://127.0.0.1:8000/lista_usuarios/").subscribe(
+      data=>{
+        console.log(data)
+      }
     )
   }
 
+  cargaUsuarios(){
+    this.authService.getUsuarios().subscribe(
+      (res)=>{
+        console.log(res);
+        this.usuarios = res;
+      }
+      ,
+      (error)=>{
+        console.log(error);
+      }
+    )
+  }
 
-  entrar() {
-    for (const usuario of this.users) {
-      if (usuario.user === this.credentials.username && usuario.password === this.credentials.password) {
-        localStorage.setItem('ingresado', 'true');
+  cargaAutos(){
+    this.authService.getAutos().subscribe(
+      (res)=>{
+        console.log(res);
+        this.autos = res;
+      }
+      ,
+      (error)=>{
+        console.log(error);
+      }
+    )
+  }
+
+  
+  entrar(){
+    for(const usuario of this.usuarios){
+      if(usuario.user===this.credentials.username && usuario.password === this.credentials.password){
+        localStorage.setItem('ingresado','true');
         let navegationExtras: NavigationExtras = {
           state: {
             credentials: this.credentials

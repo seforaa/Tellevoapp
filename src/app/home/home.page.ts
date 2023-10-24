@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, RouterLinkWithHref } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomePage {
   credentials: any;
   autos: any = [];
 
-  constructor(private http: HttpClient, private activeroute: ActivatedRoute, private router: Router) {
+  constructor( private authService: AuthService, private http: HttpClient, private activeroute: ActivatedRoute, private router: Router) {
     this.activeroute.queryParams.subscribe(params => {
       this.state = this.router.getCurrentNavigation()?.extras.state;
       this.credentials = this.state.credentials
@@ -22,18 +23,20 @@ export class HomePage {
     });
   }
 
-  ngOnInit() {
-    this.getAutos().subscribe(res => {
-      console.log("res", res)
-      this.autos = res;
-    })
+  ngOnInit(){
+    this.cargaAutos()
   }
 
-  getAutos() {
-    return this.http.get("assets/files/autos.json").pipe(
-      map((res: any) => {
-        return res.data;
-      })
+  cargaAutos(){
+    this.authService.getAutos().subscribe(
+      (res)=>{
+        console.log(res);
+        this.autos = res;
+      }
+      ,
+      (error)=>{
+        console.log(error);
+      }
     )
   }
 
