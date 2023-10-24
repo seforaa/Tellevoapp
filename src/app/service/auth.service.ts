@@ -31,4 +31,9 @@ export class AuthService {
     return localStorage.getItem('usuarioLogeado') === 'true';
   }
 
+  estaAutenticado(): boolean {
+    const usuarioAutenticado = localStorage.getItem('ingresado');
+    return usuarioAutenticado === 'true';
+  }
+
 }

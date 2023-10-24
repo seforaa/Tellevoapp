@@ -9,38 +9,36 @@ import { AuthService } from '../service/auth.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage{
+
+
+export class LoginPage {
   credentials = {
-    username :  "",
-    password :  ""
+    username: "",
+    password: ""
   }
 
-  
-  mostrarError: boolean = false;
- 
   hide = true;
-  
   usuarios : any = [];
   autos : any = [];
+  users: any = [];
+  loginerror: boolean = false;
+  loginvacio: boolean = false;
 
-
-
-  constructor(private router: Router, private http: HttpClient, private authService: AuthService) {}
+  constructor(private router: Router, private http: HttpClient, private authService: AuthService) { }
 
   ngOnInit(){
     this.cargaUsuarios()
     this.cargaAutos()
   }
 
-  ingresar() {
-    localStorage.setItem('ingresado','true');
-    let navegationExtras: NavigationExtras = {
-      state: {
-        credentials: this.credentials
-      }
-    }
-    this.router.navigate(['/home'], navegationExtras)
-    
+  ionViewWillEnter() {
+    // Limpiar los campos de entrada al volver a la página de inicio
+    this.credentials.username = "";
+    this.credentials.password = "";
+
+    // Restablecer las banderas de error
+    this.loginerror = false;
+    this.loginvacio = false;
   }
 
   login(){
@@ -82,7 +80,6 @@ export class LoginPage{
     for(const usuario of this.usuarios){
       if(usuario.user===this.credentials.username && usuario.password === this.credentials.password){
         localStorage.setItem('ingresado','true');
-        this.mostrarError = false;
         let navegationExtras: NavigationExtras = {
           state: {
             credentials: this.credentials
@@ -90,11 +87,14 @@ export class LoginPage{
         }
         this.router.navigate(['/home'], navegationExtras)
         console.log("correcto");
-        
-        
-        }
-      else{
-        this.mostrarError = true;
+      }
+      else if(this.credentials.username == "" || this.credentials.password  == ""){
+        this.loginvacio = true;
+        this.loginerror = false;
+      }
+      else {
+        this.loginerror = true;
+        this.loginvacio = false;
       }
     }
   }

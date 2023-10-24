@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 })
 
 export class IngresoGuard implements CanActivate {
+  
   navCtrl = inject(NavController)
   canActivate(
     route: ActivatedRouteSnapshot,

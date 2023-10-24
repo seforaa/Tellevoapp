@@ -1,34 +1,26 @@
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true">
   <p>
     <mat-toolbar color="color">
-      <ion-button fill="outline" color="color" [routerLink]="['/restablecer']">Salir</ion-button>
       <span>Te Llevo APP</span>
     </mat-toolbar>
   </p>
-  <div class="container">
+  <div class="centered-container">
+    <h1 style="text-align: center;">Bienvenid@ {{ credentials.username }}</h1>
     <div class="container">
-      <ion-grid class="centered-container">
-        <ion-row>
-          <h1>Bienvenid@ {{credentials.username}}</h1>
-          <br>
-        </ion-row>
-        <ion-row *ngFor="let auto of autos">
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>Dueño: {{ auto.duenno }}</ion-card-title>
-              <ion-card-subtitle>Patente {{ auto.patente }} - Destino {{ auto.destino }}</ion-card-subtitle>
-            </ion-card-header>
+      <ion-row class="ion-text-center" *ngFor="let auto of autos">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Dueño: {{ auto.duenno }}</ion-card-title>
+            <ion-card-subtitle>Patente {{ auto.patente }} - Destino {{ auto.destino }}</ion-card-subtitle>
+          </ion-card-header>
 
-            <ion-card-content>
-              <ion-card-subtitle>Salida: {{ auto.salida }}</ion-card-subtitle>
-            </ion-card-content>
-          </ion-card>
-        </ion-row>
-        <ion-row>
-
-          <ion-button fill="outline" color="color" (click)="salir()">Salir</ion-button>
-        </ion-row>
-      </ion-grid>
+          <ion-card-content>
+            <ion-card-subtitle>Salida: {{ auto.salida }}</ion-card-subtitle>
+          </ion-card-content>
+        </ion-card>
+      </ion-row>
     </div>
+    <br>
+    <ion-button fill="outline" color="color" (click)="salir()">Salir</ion-button>
   </div>
 </ion-content>
