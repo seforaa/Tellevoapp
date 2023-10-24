@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, RouterLinkWithHref} from '@angular/router';
+import { Router, ActivatedRoute, RouterLinkWithHref } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
@@ -12,10 +12,9 @@ export class HomePage {
 
   state: any;
   credentials: any;
- 
   autos: any = [];
 
-  constructor( private http: HttpClient, private activeroute: ActivatedRoute, private router: Router) {
+  constructor(private http: HttpClient, private activeroute: ActivatedRoute, private router: Router) {
     this.activeroute.queryParams.subscribe(params => {
       this.state = this.router.getCurrentNavigation()?.extras.state;
       this.credentials = this.state.credentials
@@ -23,25 +22,23 @@ export class HomePage {
     });
   }
 
-  ngOnInit(){
-    this.getAutos().subscribe(res=>{
+  ngOnInit() {
+    this.getAutos().subscribe(res => {
       console.log("res", res)
       this.autos = res;
     })
   }
 
-  getAutos(){
+  getAutos() {
     return this.http.get("assets/files/autos.json").pipe(
-      map((res:any)=>{
+      map((res: any) => {
         return res.data;
       })
     )
   }
-  
-  salir(){
-    localStorage.removeItem('ingresado');
-    this.router.navigate(['/login']);
-  }
 
-  
+  salir() {
+    localStorage.removeItem('ingresado');
+    this.router.navigate(['/login']);    
+  }
 }

@@ -25,6 +25,12 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <div *ngIf="loginerror" class="error-message" style="color: red;">
+    Credenciales incorrectas. Verifica tu usuario y contraseña.
+  </div>
+  <div *ngIf="loginvacio" class="error-message" style="color: red;">
+    No puede dejar campos vacios
+  </div>
   <br>
   <ion-button fill="outline" color="color" (click)="entrar()" >Ingresar</ion-button>
   <br>
