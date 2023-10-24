@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, RouterLinkWithHref} from '@angular/router';
+import { Router, ActivatedRoute, RouterLinkWithHref } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../service/auth.service';
@@ -13,7 +13,6 @@ export class HomePage {
 
   state: any;
   credentials: any;
- 
   autos: any = [];
 
   constructor( private authService: AuthService, private http: HttpClient, private activeroute: ActivatedRoute, private router: Router) {
@@ -40,12 +39,9 @@ export class HomePage {
       }
     )
   }
- 
-  
-  salir(){
-    localStorage.removeItem('ingresado');
-    this.router.navigate(['/login']);
-  }
 
-  
+  salir() {
+    localStorage.removeItem('ingresado');
+    this.router.navigate(['/login']);    
+  }
 }

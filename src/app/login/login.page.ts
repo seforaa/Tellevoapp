@@ -90,11 +90,9 @@ export class LoginPage {
       }
       else if(this.credentials.username == "" || this.credentials.password  == ""){
         this.loginvacio = true;
-        this.loginerror = false;
       }
       else {
         this.loginerror = true;
-        this.loginvacio = false;
       }
     }
   }
