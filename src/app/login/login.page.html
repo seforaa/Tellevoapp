@@ -32,6 +32,9 @@
   <div *ngIf="loginvacio" class="error-message" style="color: red;">
     No puede dejar campos vacios
   </div>
+  <div *ngIf="error" class="error-message" style="color: red;">
+    No hay usuarios
+  </div>
   <br>
   <ion-button fill="outline" color="color" (click)="entrar()" >Ingresar</ion-button>
   <br>

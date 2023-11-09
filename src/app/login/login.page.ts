@@ -19,16 +19,17 @@ export class LoginPage {
 
   hide = true;
   usuarios : any = [];
-  autos : any = [];
+  viajes : any = [];
   users: any = [];
   loginerror: boolean = false;
   loginvacio: boolean = false;
+  error: boolean = false;
 
   constructor(private router: Router, private http: HttpClient, private authService: AuthService) { }
 
   ngOnInit(){
     this.cargaUsuarios()
-    this.cargaAutos()
+    this.cargaViajes()
   }
 
   ionViewWillEnter() {
@@ -62,11 +63,11 @@ export class LoginPage {
     )
   }
 
-  cargaAutos(){
-    this.authService.getAutos().subscribe(
+  cargaViajes(){
+    this.authService.getViajes().subscribe(
       (res)=>{
         console.log(res);
-        this.autos = res;
+        this.viajes = res;
       }
       ,
       (error)=>{
@@ -77,25 +78,40 @@ export class LoginPage {
 
   
   entrar(){
-    for(const usuario of this.usuarios){
-      if(usuario.user===this.credentials.username && usuario.password === this.credentials.password){
-        localStorage.setItem('ingresado','true');
-        let navegationExtras: NavigationExtras = {
-          state: {
-            credentials: this.credentials
+    if(this.credentials.username == "" || this.credentials.password  == ""){
+      this.loginvacio = true;
+      this.loginerror = false;
+      this.error = false;
+      console.log("vacio")
+    }
+    else if (this.usuarios.length>0){
+      for(const usuario of this.usuarios){
+        if(usuario.user===this.credentials.username && usuario.password === this.credentials.password){
+          localStorage.setItem('ingresado','true');
+          let navegationExtras: NavigationExtras = {
+            state: {
+              credentials: this.credentials
+              
+            }
           }
+          this.router.navigate(['/home'], navegationExtras)
+          console.log("correcto");
         }
-        this.router.navigate(['/home'], navegationExtras)
-        console.log("correcto");
+        else {
+          this.loginvacio = false;
+          this.loginerror = true;
+          this.error = false;
+          console.log("ta mal")
+    
+        }
       }
-      else if(this.credentials.username == "" || this.credentials.password  == ""){
-        this.loginvacio = true;
-        this.loginerror = false;
-      }
-      else {
-        this.loginerror = true;
-        this.loginvacio = false;
-      }
+    }
+    else {
+      this.loginvacio = false;
+      this.loginerror = false;
+      this.error = true;
+      console.log("No hay Usuarios Registrados")
+
     }
   }
 }

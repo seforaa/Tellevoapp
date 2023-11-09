@@ -19,21 +19,14 @@ export class AuthService {
 
   getUsuarios(): Observable<any> { 
     return this.http.get(this.apiURL + 'lista_usuarios/').
-    pipe(retry(10)); 
+    pipe(retry(2)); 
   }
 
-  getAutos():Observable<any> {
-    return this.http.get(this.apiURL+'lista_autos/').
-    pipe(retry(10))
+  getViajes():Observable<any> {
+    return this.http.get(this.apiURL+'lista_viaje/').
+    pipe(retry(2))
   }
 
-  Ingresado(): boolean {
-    return localStorage.getItem('usuarioLogeado') === 'true';
-  }
 
-  estaAutenticado(): boolean {
-    const usuarioAutenticado = localStorage.getItem('ingresado');
-    return usuarioAutenticado === 'true';
-  }
 
 }

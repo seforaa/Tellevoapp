@@ -13,7 +13,7 @@ export class HomePage {
 
   state: any;
   credentials: any;
-  autos: any = [];
+  viajes: any = [];
 
   constructor( private authService: AuthService, private http: HttpClient, private activeroute: ActivatedRoute, private router: Router) {
     this.activeroute.queryParams.subscribe(params => {
@@ -24,14 +24,14 @@ export class HomePage {
   }
 
   ngOnInit(){
-    this.cargaAutos()
+    this.cargaViaje()
   }
 
-  cargaAutos(){
-    this.authService.getAutos().subscribe(
+  cargaViaje(){
+    this.authService.getViajes().subscribe(
       (res)=>{
         console.log(res);
-        this.autos = res;
+        this.viajes = res;
       }
       ,
       (error)=>{
