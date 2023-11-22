@@ -14,12 +14,14 @@ export class HomePage {
   state: any;
   credentials: any;
   viajes: any = [];
+  tipo_user : any;
 
   constructor( private authService: AuthService, private http: HttpClient, private activeroute: ActivatedRoute, private router: Router) {
     this.activeroute.queryParams.subscribe(params => {
       this.state = this.router.getCurrentNavigation()?.extras.state;
       this.credentials = this.state.credentials
-      console.log(this.credentials);
+      this.tipo_user = this.state.tipo
+      console.log(this.credentials+' desde el home El tipo es:', this.tipo_user);
     });
   }
 

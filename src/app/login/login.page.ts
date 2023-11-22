@@ -17,6 +17,8 @@ export class LoginPage {
     password: ""
   }
 
+  tipo_user : any;
+
   hide = true;
   usuarios : any = [];
   viajes : any = [];
@@ -90,7 +92,8 @@ export class LoginPage {
           localStorage.setItem('ingresado','true');
           let navegationExtras: NavigationExtras = {
             state: {
-              credentials: this.credentials
+              credentials: this.credentials,
+              tipo : usuario.tipo_user
               
             }
           }
