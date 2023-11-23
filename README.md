@@ -13,8 +13,12 @@ ALTER USER nombre DEFAULT TABLESPACE USERS QUOTA UNLIMITED ON USERS;
 -- COMANDOS PARA DJANGO
 
 pip install djangorestframework
+
 pip install cx_oracle
+
 pip install pillow
+
+python -m pip install django-cors-headers
 
 -- COMANDOS PARA CORRER EL SERVIDOR
 
