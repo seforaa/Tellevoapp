@@ -25,11 +25,15 @@ const routes: Routes = [
     canActivate: [NoGuard]
   },
   {
+    path: 'viaje',
+    loadChildren: () => import('./viaje/viaje.module').then( m => m.ViajePageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./notfound/notfound.module').then( m => m.NotfoundPageModule),
     canActivate: [NoGuard]
   },
-  
+
 
 ];
 

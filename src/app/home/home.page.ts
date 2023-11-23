@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, RouterLinkWithHref } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../service/auth.service';
+import { NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-home',
@@ -16,7 +18,7 @@ export class HomePage {
   viajes: any = [];
   tipo_user : any;
 
-  constructor( private authService: AuthService, private http: HttpClient, private activeroute: ActivatedRoute, private router: Router) {
+  constructor(private navCtrl: NavController,private authService: AuthService, private http: HttpClient, private activeroute: ActivatedRoute, private router: Router) {
     this.activeroute.queryParams.subscribe(params => {
       this.state = this.router.getCurrentNavigation()?.extras.state;
       this.credentials = this.state.credentials
@@ -46,4 +48,10 @@ export class HomePage {
     localStorage.removeItem('ingresado');
     this.router.navigate(['/login']);    
   }
+
+  Viaje(){
+    console.log("Boton funciona")
+    this.router.navigate(['/viaje']);   
+  }
+
 }
