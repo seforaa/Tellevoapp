@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-viaje',
@@ -18,7 +19,7 @@ export class ViajePage implements OnInit {
     precio: null,
   };
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private location: Location) { }
 
   ngOnInit() {
   }
@@ -27,7 +28,9 @@ export class ViajePage implements OnInit {
     this.authService.postViaje(this.viaje).subscribe(
       (response) => {
         console.log('Viaje guardado correctamente:', response);
-        this.router.navigate(['/home'])
+        this.router.navigate(['/home']).then(() => {
+          console.log('Vista de /home recargada');
+        });
         // Puedes realizar acciones adicionales después de guardar el viaje
       },
       (error) => {
