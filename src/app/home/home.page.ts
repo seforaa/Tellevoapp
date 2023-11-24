@@ -48,6 +48,7 @@ export class HomePage {
     )
   }
 
+
   salir() {
     localStorage.removeItem('ingresado');
     this.router.navigate(['/login']);    

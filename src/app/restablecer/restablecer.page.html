@@ -8,12 +8,18 @@
     <h1>Restablecer contraseña</h1>
     <mat-form-field>
       <mat-label>Ingresa tu usuario</mat-label>
-      <input  matInput>
+      <input  matInput [(ngModel)]="username">
     </mat-form-field>
     <br>
-    <ion-button color="color" fill="outline" [routerLink]="['/login']" id="present-alert">Restablecer
+    <div *ngIf="error" class="error-message" style="color: red;">
+      Debe ingresar el usuario para restablecer contraseña
+    </div>
+    <ion-button color="color" fill="outline" (click)="restablecer()" id="present-alert">Restablecer
       contraseña</ion-button>
-    <ion-alert trigger="present-alert" message="Se ha enviado un mensaje para restablecer contraseña"
+      <br>
+  <br>
+  <a fill="outline" color="color" [routerLink]="['/login']">Volver</a>
+    <ion-alert *ngIf="mensaje" trigger="present-alert" message="Se ha enviado un mensaje para restablecer contraseña"
       [buttons]="alertButtons"></ion-alert>
 
   </div>

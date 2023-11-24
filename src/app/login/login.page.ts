@@ -99,6 +99,7 @@ export class LoginPage {
           }
           this.router.navigate(['/home'], navegationExtras)
           console.log("correcto");
+          return;
         }
         else {
           this.loginvacio = false;
