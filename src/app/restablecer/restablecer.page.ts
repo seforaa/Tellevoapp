@@ -9,18 +9,21 @@ import { Router } from '@angular/router';
 export class RestablecerPage implements OnInit {
   hide = true;
   public alertButtons = ['OK'];
+  username: string ="";
+  error: boolean = false;
+  mensaje: boolean = false;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-
   }
 
-  ingresar() {
-    this.router.navigate(['/home']);
+  restablecer() {
+    if(this.username ==""){
+      this.error = true;
+    }else{
+      this.mensaje = true;
+      this.router.navigate(['/home']);
+    }
   }
-
-
-
-
 }

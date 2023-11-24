@@ -23,6 +23,7 @@
 }
 
 #container a {
+  color: var(--ion-color-color);
   text-decoration: none;
 }
 
@@ -30,7 +31,10 @@ mat-toolbar {
   background-color: var(--ion-color-color);
 }
 
-
-ion-button {
+ion-button{
   color: var(--ion-color-color);
+}
+
+.mat {
+  width: 70%; 
 }

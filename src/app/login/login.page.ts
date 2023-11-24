@@ -94,11 +94,11 @@ export class LoginPage {
             state: {
               credentials: this.credentials,
               tipo : usuario.tipo_user
-              
             }
           }
           this.router.navigate(['/home'], navegationExtras)
           console.log("correcto");
+          return;
         }
         else {
           this.loginvacio = false;
