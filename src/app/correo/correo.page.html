@@ -5,16 +5,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <h1>Ingresa tu Correo</h1>
+  <div class="ion-text-center">
+    <h1>Ingresa tu Correo</h1>
 
-  <br>
-  
-  <mat-form-field class="mat">
-    <mat-label>Ingresa tu usuario</mat-label>
-    <input matInput [(ngModel)]="correo">
-  </mat-form-field>
-  
-  
-  <ion-button fill="outline" color="color" (click)="enviar()" >Enviar Correo</ion-button>
+    <br>
+
+    <div>
+
+      <mat-form-field class="mat">
+        <mat-label>Ingresa tu usuario</mat-label>
+        <input matInput [(ngModel)]="correo">
+      </mat-form-field>
+
+    </div>
+
+
+
+    <ion-button fill="outline" color="success" style="align-items: center;" (click)="enviar()">Enviar
+      Correo</ion-button>
+  </div>
 
 </ion-content>
