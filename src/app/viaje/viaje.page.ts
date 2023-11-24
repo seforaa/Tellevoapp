@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras, ActivatedRoute} from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
@@ -19,17 +19,47 @@ export class ViajePage implements OnInit {
     precio: null,
   };
 
-  constructor(private authService: AuthService, private router: Router, private location: Location) { }
+  state: any;
+  credentials: any;
+  tipo_user : any;
+
+
+  constructor(private authService: AuthService, private router: Router, private location: Location, private activeroute: ActivatedRoute) { 
+    this.activeroute.queryParams.subscribe(params => {
+      this.state = this.router.getCurrentNavigation()?.extras.state;
+      this.credentials = this.state.credentials
+      this.tipo_user = this.state.tipo_user
+      console.log(this.credentials+' desde el home El tipo es:', this.tipo_user);
+    });
+   }
 
   ngOnInit() {
+    console.log('este es el usuario q llega'+this.state.credentials.username)
   }
 
   guardarViaje() {
     this.authService.postViaje(this.viaje).subscribe(
       (response) => {
         console.log('Viaje guardado correctamente:', response);
-        this.router.navigate(['/home']).then(() => {
+        const nuevoState = {
+          datos: this.credentials
+        };
+        const nuevoTipo = {
+          tipo: this.tipo_user
+        }
+        let navegationExtras: NavigationExtras = {
+          state: {
+            credentials: nuevoState.datos,
+            tipo_user : nuevoTipo.tipo
+          }
+        }
+        console.log('Estado enviado:', navegationExtras.state);
+        console.log("Hola Mundo")
+        console.log(nuevoState)
+        console.log('TIPO USER QUE WEA'+nuevoTipo.tipo)
+        this.router.navigate(['/home'], navegationExtras).then(() => {
           console.log('Vista de /home recargada');
+          window.location.reload();
         });
         // Puedes realizar acciones adicionales después de guardar el viaje
       },

@@ -26,7 +26,8 @@ const routes: Routes = [
   },
   {
     path: 'viaje',
-    loadChildren: () => import('./viaje/viaje.module').then( m => m.ViajePageModule)
+    loadChildren: () => import('./viaje/viaje.module').then( m => m.ViajePageModule),
+    canActivate: [IngresoGuard]
   },
   {
     path: '**',

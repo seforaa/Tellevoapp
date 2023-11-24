@@ -5,40 +5,47 @@
     </mat-toolbar>
   </p>
   <div>
-    <ion-grid class="justify-content-center align-items-center"> 
-      <ion-row>
-        <h1 class="ion-text-center">Bienvenid@ {{ credentials.username }}</h1>
-      </ion-row>
-    </ion-grid>
-    <ion-grid *ngIf="tipo_user == 1">
-      <ion-row>
-        <ion-col size="8" style="margin-top: 4%;">
-          <h4>Aqui puedes crear tus viajes</h4>
-        </ion-col>
-        <ion-col size="3">
-          <ion-button fill="outline" color="success" [routerLink]="['/viaje']">Crear Viaje</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <ion-grid *ngFor="let viaje of viajes">
-
-      <div class="container ion-text-center ion-align-items-center">
-        <ion-row class="ion-text-center">
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>Dueño: {{ viaje.duenno }}</ion-card-title>
-              <ion-card-subtitle>Patente {{ viaje.patente }} - Destino {{ viaje.destino }}</ion-card-subtitle>
-            </ion-card-header>
-
-            <ion-card-content>
-              <ion-card-subtitle>Salida: {{ viaje.salida }}</ion-card-subtitle>
-              <ion-card-subtitle>Capacidad: {{ viaje.capacidad }}</ion-card-subtitle>
-            </ion-card-content>
-          </ion-card>
-        </ion-row>
+      <div> 
+          <div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <h1>Bienvenid@ {{ credentials.username }}</h1>
+            </div>
+          </div>
       </div>
-    </ion-grid>
-    <br>
-    <ion-button fill="outline" style="margin-bottom: 10px;" color="color" (click)="salir()">Salir</ion-button>
+      <div *ngIf="tipo_user == 1">
+          <ion-row>
+              <ion-col size="8" style="margin-top: 4%;">
+                <h4>Aqui puedes crear tus viajes</h4>
+              </ion-col>
+              <ion-col size="2">
+                <ion-button fill="outline" color="success" (click)="Viaje()">Crear Viaje</ion-button>
+              </ion-col>
+          </ion-row>
+      </div>
+      <div *ngFor="let viaje of viajes" >
+          <div class="container ion-text-center ion-align-items-center">
+            <div class="ion-text-center">
+              <ion-card>
+                <ion-card-header>
+                  <ion-card-title>Dueño: {{ viaje.duenno }}</ion-card-title>
+                  <ion-card-subtitle>Patente {{ viaje.patente }} - Destino {{ viaje.destino }}</ion-card-subtitle>
+                </ion-card-header>
+
+                <ion-card-content>
+                  <ion-card-subtitle>Salida: {{ viaje.salida }}</ion-card-subtitle>
+                  <ion-card-subtitle>Capacidad: {{ viaje.capacidad }}</ion-card-subtitle>
+                  <input value="{{ viaje.capacidad }}" type="hidden">
+                </ion-card-content>
+                <ion-card-content>
+                  <ion-button fill="outline" *ngIf="viaje.capacidad != 0" style="margin-bottom: 10px;" color="color" (click)="tomarViaje(viaje.patente)">Tomar Viaje</ion-button>
+                  <p fill="outline" *ngIf="viaje.capacidad == 0" color="success">Viaje Lleno</p>
+                </ion-card-content>
+              </ion-card>
+            </div>
+          </div>
+      </div>
+      <div class="ion-text-center">
+        <ion-button fill="outline" style="margin-bottom: 10px;" color="color" (click)="salir()">Salir</ion-button>
+      </div>
   </div>
 </ion-content>

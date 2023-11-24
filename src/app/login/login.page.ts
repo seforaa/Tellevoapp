@@ -93,7 +93,7 @@ export class LoginPage {
           let navegationExtras: NavigationExtras = {
             state: {
               credentials: this.credentials,
-              tipo : usuario.tipo_user
+              tipo_user : usuario.tipo_user
               
             }
           }
