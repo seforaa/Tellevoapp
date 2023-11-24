@@ -15,8 +15,8 @@ export class ViajePage implements OnInit {
     duenno: '',
     destino: '',
     salida: '',
-    capacidad: 0,  // Corregido: Asigna null como número
-    precio: 0,  
+    capacidad: null,  // Corregido: Asigna null como número
+    precio: null,  
   };
   vacio: boolean=false;
 
@@ -39,7 +39,7 @@ export class ViajePage implements OnInit {
   }
 
   guardarViaje() {
-    if(this.viaje.patente=="" || this.viaje.duenno=="" || this.viaje.destino=="" || this.viaje.salida=="" || this.viaje.capacidad>0 || this.viaje.precio>0){
+    if(this.viaje.patente=="" || this.viaje.duenno=="" || this.viaje.destino=="" || this.viaje.salida==""){
       this.vacio = true;
     }else{
     this.authService.postViaje(this.viaje).subscribe(
@@ -74,6 +74,24 @@ export class ViajePage implements OnInit {
       }
     );
   }
+  
   }
 
+  salir(){
+    const nuevoState = {
+      datos: this.credentials
+    };
+    const nuevoTipo = {
+      tipo: this.tipo_user
+    }
+    let navegationExtras: NavigationExtras = {
+      state: {
+        credentials: nuevoState.datos,
+        tipo_user : nuevoTipo.tipo
+      }
+    }
+    this.router.navigate(['/home'], navegationExtras).then(() => {
+      console.log('Vista de /home recargada');
+    });
+  }
 }

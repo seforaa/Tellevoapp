@@ -37,12 +37,27 @@
                   <input value="{{ viaje.capacidad }}" type="hidden">
                 </ion-card-content>
                 <ion-card-content>
-                  <ion-button fill="outline" *ngIf="viaje.capacidad != 0" style="margin-bottom: 10px;" color="color" (click)="tomarViaje(viaje.patente)">Tomar Viaje</ion-button>
+                  <ion-button fill="outline" *ngIf="viaje.capacidad != 0" style="margin-bottom: 10px;" color="color" (click)="tomarViaje(viaje.patente)" [disabled]="Tomado">Tomar Viaje</ion-button>
                   <p fill="outline" *ngIf="viaje.capacidad == 0" color="success">Viaje Lleno</p>
                 </ion-card-content>
               </ion-card>
             </div>
           </div>
+      </div>
+      <div class="ion-text-center">
+        <ion-button fill="outline" style="margin-bottom: 10px;" color="danger" (click)="geolocalizar()">Obtener Ubicacion</ion-button>
+      </div>
+      <div *ngIf="userGeoloca" color="success" class="ion-text-center">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Estas son tus Coordenadas</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-card-subtitle>Latitud: {{ userGeoloca.coords.latitude }}</ion-card-subtitle>
+            <ion-card-subtitle>Longitud: {{ userGeoloca.coords.longitude }}</ion-card-subtitle>
+          </ion-card-content>
+        </ion-card>
       </div>
       <div class="ion-text-center">
         <ion-button fill="outline" style="margin-bottom: 10px;" color="color" (click)="salir()">Salir</ion-button>

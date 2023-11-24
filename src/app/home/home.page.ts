@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, NavigationExtras} from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras, RouterLink} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../service/auth.service';
 import { NavController } from '@ionic/angular';
+import { Geolocation } from '@capacitor/geolocation';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class HomePage {
   viajes: any = [];
   tipo_user : any;
 
-  
+  userGeoloca: any;
+  Tomado : boolean = false;
 
   constructor(private navCtrl: NavController,private authService: AuthService, private http: HttpClient, private activeroute: ActivatedRoute, private router: Router) {
     this.activeroute.queryParams.subscribe(params => {
@@ -82,10 +84,24 @@ export class HomePage {
       if (viaje.patente == patente){
         console.log("Hola Mundo")
         viaje.capacidad -= 1;
+        this.Tomado = true;
         this.authService.putViaje(viaje.patente, viaje).subscribe(
           response => {
             console.log('Capacidad actualizada con éxito:', response);
             console.log('esta es la nueva capacidad '+viaje.capacidad)
+            const nuevoState = {
+              datos: this.credentials
+            };
+            const nuevoTipo = {
+              tipo: this.tipo_user
+            }
+            let navegationExtras: NavigationExtras = {
+              state: {
+                credentials: nuevoState.datos,
+                tipo_user: nuevoTipo.tipo
+              }
+            }
+            this.router.navigate(['/correo'], navegationExtras)
           },
           error => {
             console.error('Error al actualizar la capacidad:', error);
@@ -94,6 +110,17 @@ export class HomePage {
       }
     }
 
+  }
+
+  
+  async geolocalizar() {
+    try {
+      const coordinates = await Geolocation.getCurrentPosition();
+      this.userGeoloca = coordinates;
+      console.log('Posicion Actual:', coordinates);
+    } catch (error) {
+      console.error('Error al obtener la ubicación:', error);
+    }
   }
 
 }

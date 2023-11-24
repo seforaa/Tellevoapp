@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Correo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <h1>Ingresa tu Correo</h1>
+  
+  <mat-form-field class="mat">
+    <mat-label>Ingresa tu usuario</mat-label>
+    <input matInput [(ngModel)]="correo">
+  </mat-form-field>
+  
+  
+  <ion-button fill="outline" color="color" (click)="enviar()" >Enviar Correo</ion-button>
+
+</ion-content>

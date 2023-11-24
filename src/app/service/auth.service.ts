@@ -37,5 +37,8 @@ export class AuthService {
     return this.http.put(this.apiURL+'detalle_viaje/'+patente, data);
   }
 
+  enviarCorreo(data : any){
+    return this.http.post(this.apiURL+'enviar_correo/', data);
+  }
 
 }
