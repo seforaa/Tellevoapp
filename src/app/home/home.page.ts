@@ -83,8 +83,7 @@ export class HomePage {
         this.authService.putViaje(viaje.patente, viaje).subscribe(
           response => {
             console.log('Capacidad actualizada con éxito:', response);
-            console.log('este es el nuevo viaje '+viaje)
-            window.location.reload()
+            console.log('esta es la nueva capacidad '+viaje.capacidad)
           },
           error => {
             console.error('Error al actualizar la capacidad:', error);
