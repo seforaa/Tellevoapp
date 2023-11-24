@@ -15,8 +15,8 @@ export class ViajePage implements OnInit {
     duenno: '',
     destino: '',
     salida: '',
-    capacidad: null,
-    precio: null,
+    capacidad: 0,  // Corregido: Asigna null como número
+    precio: 0,  
   };
   vacio: boolean=false;
 
@@ -39,7 +39,7 @@ export class ViajePage implements OnInit {
   }
 
   guardarViaje() {
-    if(this.viaje.patente=="" || this.viaje.duenno=="" || this.viaje.destino=="" || this.viaje.salida=="" || this.viaje.capacidad==null || this.viaje.precio==null){
+    if(this.viaje.patente=="" || this.viaje.duenno=="" || this.viaje.destino=="" || this.viaje.salida=="" || this.viaje.capacidad>0 || this.viaje.precio>0){
       this.vacio = true;
     }else{
     this.authService.postViaje(this.viaje).subscribe(

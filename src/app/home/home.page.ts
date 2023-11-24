@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { AuthService } from '../service/auth.service';
 import { NavController } from '@ionic/angular';
 
@@ -13,8 +12,11 @@ import { NavController } from '@ionic/angular';
 })
 export class HomePage {
 
+  credentials: any = {
+    username: '',
+    password: ''
+  }
   state: any;
-  credentials: any;
   viajes: any = [];
   tipo_user : any;
 
