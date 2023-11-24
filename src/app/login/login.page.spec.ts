@@ -80,7 +80,7 @@ describe('LoginPage', () => {
     expect(component.error).toBeFalsy();
   });
 
-  it('debe establecer loginerror en verdadero si no se encuentra ningún usuario coincidente al entrar', () => {
+  it('debe establecer loginerror en verdadero si no se encuentra ningún usuario coincidente al entrar', fakeAsync(() => {
     spyOn(authService, 'getUsuarios').and.returnValue(of([]));
 
     component.credentials.username = 'errortestuser';
@@ -96,7 +96,7 @@ describe('LoginPage', () => {
     expect(component.loginvacio).toBeFalsy();
     expect(component.loginerror).toBeTruthy();
     expect(component.error).toBeFalsy();
-  });
+  }));
 
   it('debe navegar al home si se encuentra un usuario coincidente al ingresar', fakeAsync(() => {
     const mockUsuarios = [{ user: 'testuser', password: 'testpassword', tipo_user: 'Conductor' }];

@@ -18,6 +18,7 @@ export class ViajePage implements OnInit {
     capacidad: null,
     precio: null,
   };
+  vacio: boolean=false;
 
   constructor(private authService: AuthService, private router: Router, private location: Location) { }
 
@@ -25,6 +26,9 @@ export class ViajePage implements OnInit {
   }
 
   guardarViaje() {
+    if(this.viaje.patente=="" || this.viaje.duenno=="" || this.viaje.destino=="" || this.viaje.salida=="" || this.viaje.capacidad==null || this.viaje.precio==null){
+      this.vacio = true;
+    }else{
     this.authService.postViaje(this.viaje).subscribe(
       (response) => {
         console.log('Viaje guardado correctamente:', response);
@@ -39,6 +43,7 @@ export class ViajePage implements OnInit {
         console.log(this.viaje)
       }
     );
+  }
   }
 
 }
