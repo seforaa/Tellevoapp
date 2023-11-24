@@ -13,7 +13,9 @@ interface User {
 })
 export class AuthService {
 
-  private apiURL = 'http://127.0.0.1:8000/'; 
+  //private apiURL = 'http://127.0.0.1:8000/';https://f2g52rkf-8000.brs.devtunnels.ms/ 
+
+  private apiURL = 'https://f2g52rkf-8000.brs.devtunnels.ms/';
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +29,9 @@ export class AuthService {
     pipe(retry(2))
   }
 
+  postViaje(data: any) {
+    return this.http.post(this.apiURL+'lista_viaje/', data);
+  }
 
 
 }

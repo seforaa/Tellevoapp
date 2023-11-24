@@ -4,19 +4,19 @@
       <span>Te Llevo APP</span>
     </mat-toolbar>
   </p>
-  <div class="ion-text-center ion-align-items-center">
-    <ion-grid class="ion-text-center ion-align-items-center"> 
+  <div>
+    <ion-grid class="justify-content-center align-items-center"> 
       <ion-row>
         <h1 class="ion-text-center">Bienvenid@ {{ credentials.username }}</h1>
       </ion-row>
     </ion-grid>
     <ion-grid *ngIf="tipo_user == 1">
       <ion-row>
-        <ion-col size="8" style="margin-top: 5%;">
+        <ion-col size="8" style="margin-top: 4%;">
           <h4>Aqui puedes crear tus viajes</h4>
         </ion-col>
         <ion-col size="3">
-          <ion-button fill="outline" color="success">Crear Viaje</ion-button>
+          <ion-button fill="outline" color="success" [routerLink]="['/viaje']">Crear Viaje</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -38,6 +38,6 @@
       </div>
     </ion-grid>
     <br>
-    <ion-button fill="outline" color="color" (click)="salir()">Salir</ion-button>
+    <ion-button fill="outline" style="margin-bottom: 10px;" color="color" (click)="salir()">Salir</ion-button>
   </div>
 </ion-content>

@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>viaje</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding ion-text-center alig-items-center">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <mat-form-field class="mat">
+          <mat-label>Ingresa tu Patente</mat-label>
+          <input matInput [(ngModel)]="viaje.patente">
+        </mat-form-field>
+      </ion-col>
+      <ion-col>
+        <mat-form-field>
+          <mat-label>Ingrese Dueño</mat-label>
+          <input matInput [(ngModel)]="viaje.duenno">
+        </mat-form-field>
+      </ion-col>
+      <ion-col>
+        <mat-form-field>
+          <mat-label>Ingrese Destino</mat-label>
+          <input matInput [(ngModel)]="viaje.destino">
+        </mat-form-field>
+      </ion-col>
+      <ion-col>
+        <mat-form-field>
+          <mat-label>Ingresa Hora de Salida</mat-label>
+          <input matInput type="time" [(ngModel)]="viaje.salida">
+        </mat-form-field>
+      </ion-col>
+      <ion-col>
+        <mat-form-field>
+          <mat-label>Ingresar Capacidad</mat-label>
+          <input matInput type="number" [(ngModel)]="viaje.capacidad">
+        </mat-form-field>
+      </ion-col>
+      <ion-col>
+        <mat-form-field>
+          <mat-label>Ingrese Precio</mat-label>
+          <input matInput type="number" [(ngModel)]="viaje.precio">
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid>
+    <ion-row justify-content-center align-items-center>
+        <ion-col size="4">
+
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button fill="outline" color="success" class="ion-text-center" (click)="guardarViaje()">Crear Viaje</ion-button>
+        </ion-col>
+        <ion-col size="4">
+
+        </ion-col>
+    </ion-row>
+  </ion-grid>
