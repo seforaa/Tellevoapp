@@ -13,7 +13,9 @@ export class RestablecerPage implements OnInit {
   error: boolean = false;
   mensaje: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) { 
+    this.error=false;
+  }
 
   ngOnInit() {
   }
