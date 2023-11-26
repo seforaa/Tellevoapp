@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, NavigationExtras, RouterLink} from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../service/auth.service';
 import { NavController } from '@ionic/angular';
@@ -19,34 +19,34 @@ export class HomePage {
   }
   state: any;
   viajes: any = [];
-  tipo_user : any;
+  tipo_user: any;
 
   userGeoloca: any;
-  Tomado : boolean = false;
+  Tomado: boolean = false;
 
-  constructor(private navCtrl: NavController,private authService: AuthService, private http: HttpClient, private activeroute: ActivatedRoute, private router: Router) {
+  constructor(private navCtrl: NavController, private authService: AuthService, private http: HttpClient, private activeroute: ActivatedRoute, private router: Router) {
     this.activeroute.queryParams.subscribe(params => {
       this.state = this.router.getCurrentNavigation()?.extras.state;
       this.credentials = this.state.credentials
       this.tipo_user = this.state.tipo_user
-      console.log(this.credentials.username+' desde el home El tipo es:', this.tipo_user);
+      console.log(this.credentials.username + ' desde el home El tipo es:', this.tipo_user);
     });
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.cargaViaje()
     console.log("Hola Mundo")
     console.log(this.state.credentials.username)
   }
 
-  cargaViaje(){
+  cargaViaje() {
     this.authService.getViajes().subscribe(
-      (res)=>{
+      (res) => {
         console.log(res);
         this.viajes = res;
       }
       ,
-      (error)=>{
+      (error) => {
         console.log(error);
       }
     )
@@ -55,10 +55,11 @@ export class HomePage {
 
   salir() {
     localStorage.removeItem('ingresado');
-    this.router.navigate(['/login']);    
+    this.Tomado = false;
+    this.router.navigate(['/login']);
   }
 
-  Viaje(){
+  Viaje() {
     console.log("Boton funciona")
     const nuevoState = {
       datos: this.credentials
@@ -75,20 +76,29 @@ export class HomePage {
     console.log('Estado enviado:', nuevoState.datos);
     console.log("Hola Mundo")
     console.log(nuevoState)
-    console.log('tipo user '+nuevoTipo)
-    this.router.navigate(['/viaje'], navegationExtras);   
+    console.log('tipo user ' + nuevoTipo)
+    this.router.navigate(['/viaje'], navegationExtras);
   }
 
-  tomarViaje(patente : string){
-    for(const viaje of this.viajes){
-      if (viaje.patente == patente){
+  tomarViaje(patente: string) {
+    for (const viaje of this.viajes) {
+      if (viaje.patente == patente) {
         console.log("Hola Mundo")
         viaje.capacidad -= 1;
         this.Tomado = true;
         this.authService.putViaje(viaje.patente, viaje).subscribe(
           response => {
             console.log('Capacidad actualizada con éxito:', response);
-            console.log('esta es la nueva capacidad '+viaje.capacidad)
+            console.log('esta es la nueva capacidad ' + viaje.capacidad)
+            
+            if (viaje.capacidad == 0){
+              console.log("deberia estar eliminado")
+              this.authService.eliminarViaje(viaje.patente, viaje).subscribe(
+                response =>{
+                  console.log("Eliminado", response)
+                }
+              );
+            }
             const nuevoState = {
               datos: this.credentials
             };
@@ -107,12 +117,13 @@ export class HomePage {
             console.error('Error al actualizar la capacidad:', error);
           }
         );
+
       }
     }
 
   }
 
-  
+
   async geolocalizar() {
     try {
       const coordinates = await Geolocation.getCurrentPosition();

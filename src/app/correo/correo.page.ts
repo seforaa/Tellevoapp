@@ -56,7 +56,10 @@ export class CorreoPage implements OnInit {
     this.authService.enviarCorreo(correo).subscribe(
       (respuesta) => {
         console.log(respuesta);
-        this.router.navigate(['/home'], navegationExtras);
+        this.router.navigate(['/home'], navegationExtras).then(() => {
+          console.log('Vista de /home recargada');
+          window.location.reload();
+        });
       },
       (error) => {
         console.error('Error al enviar el correo', error);

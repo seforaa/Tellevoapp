@@ -13,9 +13,9 @@ interface User {
 })
 export class AuthService {
 
-  //private apiURL = 'http://127.0.0.1:8000/';https://f2g52rkf-8000.brs.devtunnels.ms/ 
+  private apiURL = 'http://127.0.0.1:8000/';//https://f2g52rkf-8000.brs.devtunnels.ms/ 
 
-  private apiURL = 'https://f2g52rkf-8000.brs.devtunnels.ms/';
+  //private apiURL = 'https://f2g52rkf-8000.brs.devtunnels.ms/';
 
   constructor(private http: HttpClient) { }
 
@@ -41,4 +41,7 @@ export class AuthService {
     return this.http.post(this.apiURL+'enviar_correo/', data);
   }
 
+  eliminarViaje(patente : any, data:any){
+    return this.http.delete(this.apiURL+'detalle_viaje/'+patente, data);
+  }
 }
