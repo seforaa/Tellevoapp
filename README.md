@@ -48,4 +48,3 @@ npm install npm --force
 
 ionic serve
 
-npm install cordova-plugin-email-composer
