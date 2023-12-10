@@ -23,8 +23,15 @@
           </ion-row>
       </div>
       <h1 class="ion-text-center">Viajes de Ida</h1>
-      <div *ngFor="let viaje of viajes" >
-          <div class="container ion-text-center ion-align-items-center" *ngIf="viaje.estado_viaje == 1 && viaje.tipo_viaje == 0">
+      <div *ngIf="viajesVisiblesIda==0" class="ion-text-center" >
+      <ion-card>
+        <ion-card-content>
+          <ion-card-subtitle>No Hay Viajes</ion-card-subtitle>
+        </ion-card-content>
+      </ion-card>
+      </div>
+      <div *ngFor="let viaje of viajes">
+          <div class="container ion-text-center ion-align-items-center"  *ngIf="viaje.estado_viaje == 1 && viaje.tipo_viaje == 0">
             <div class="ion-text-center">
               <ion-card>
                 <ion-card-header>
@@ -46,6 +53,13 @@
           </div>
       </div>
       <h1 class="ion-text-center">Viajes de Vuelta</h1>
+      <div *ngIf="viajesVisiblesVuelta==0" class="ion-text-center" >
+      <ion-card>
+        <ion-card-content>
+          <ion-card-subtitle>No Hay Viajes</ion-card-subtitle>
+        </ion-card-content>
+      </ion-card>
+      </div>
       <div *ngFor="let viaje of viajes" >
           <div class="container ion-text-center ion-align-items-center" *ngIf="viaje.estado_viaje == 1 && viaje.tipo_viaje == 1">
             <div class="ion-text-center">

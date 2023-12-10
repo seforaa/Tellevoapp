@@ -31,6 +31,9 @@ export class HomePage {
   asunto: string = 'Viaje';
   cuerpo: string = 'Tu Viaje ya esta listo';
 
+  viajesVisiblesIda: number = 0;
+  viajesVisiblesVuelta: number = 0;
+
   constructor(private navCtrl: NavController, private authService: AuthService, private http: HttpClient, private activeroute: ActivatedRoute, private router: Router) {
     this.activeroute.queryParams.subscribe(params => {
       this.state = this.router.getCurrentNavigation()?.extras.state;
@@ -51,6 +54,16 @@ export class HomePage {
       (res) => {
         console.log(res);
         this.viajes = res;
+        this.viajes.forEach((n : any) => {
+          if (n.estado_viaje == 1 && n.tipo_viaje == 0) {
+            this.viajesVisiblesIda++;
+          }
+        });
+        this.viajes.forEach((n : any) => {
+          if (n.estado_viaje == 1 && n.tipo_viaje == 1) {
+            this.viajesVisiblesVuelta++;
+          }
+        });
       }
       ,
       (error) => {
@@ -105,12 +118,13 @@ export class HomePage {
               this.authService.eliminarViaje(viaje.patente, viaje).subscribe(
                 response =>{
                   console.log("Eliminado", response)
+                  window.location.reload();
                 }
               );
             }
             this.authService.obtenerCorreo(user).subscribe(
               (data) => {
-                const mail = data.mail; // Ajusta según la estructura de la respuesta de tu API
+                const mail = data.mail; 
                 console.log(mail);const correo = {
                     destinatario : mail,
                     asunto : this.asunto,
@@ -122,7 +136,6 @@ export class HomePage {
                     },
                     (error) => {
                       console.error('Error al enviar el correo', error);
-                      // Puedes manejar el error aquí, por ejemplo, mostrar un mensaje al usuario.
                     }
                   );
 
