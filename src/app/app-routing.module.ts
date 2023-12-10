@@ -30,10 +30,6 @@ const routes: Routes = [
     canActivate: [IngresoGuard]
   },
   {
-    path: 'correo',
-    loadChildren: () => import('./correo/correo.module').then( m => m.CorreoPageModule)
-  },
-  {
     path: '**',
     loadChildren: () => import('./notfound/notfound.module').then( m => m.NotfoundPageModule),
     canActivate: [NoGuard]

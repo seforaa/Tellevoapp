@@ -24,6 +24,13 @@ export class HomePage {
   userGeoloca: any;
   Tomado: boolean = false;
 
+
+  correo : any;
+
+  destinatario: any;
+  asunto: string = 'Viaje';
+  cuerpo: string = 'Tu Viaje ya esta listo';
+
   constructor(private navCtrl: NavController, private authService: AuthService, private http: HttpClient, private activeroute: ActivatedRoute, private router: Router) {
     this.activeroute.queryParams.subscribe(params => {
       this.state = this.router.getCurrentNavigation()?.extras.state;
@@ -80,7 +87,8 @@ export class HomePage {
     this.router.navigate(['/viaje'], navegationExtras);
   }
 
-  tomarViaje(patente: string) {
+  tomarViaje(patente: string, user : string) {
+    console.log('Patente a tomar:', patente);
     for (const viaje of this.viajes) {
       if (viaje.patente == patente) {
         console.log("Hola Mundo")
@@ -93,25 +101,37 @@ export class HomePage {
             
             if (viaje.capacidad == 0){
               console.log("deberia estar eliminado")
+              viaje.estado_viaje = 0;
               this.authService.eliminarViaje(viaje.patente, viaje).subscribe(
                 response =>{
                   console.log("Eliminado", response)
                 }
               );
             }
-            const nuevoState = {
-              datos: this.credentials
-            };
-            const nuevoTipo = {
-              tipo: this.tipo_user
-            }
-            let navegationExtras: NavigationExtras = {
-              state: {
-                credentials: nuevoState.datos,
-                tipo_user: nuevoTipo.tipo
+            this.authService.obtenerCorreo(user).subscribe(
+              (data) => {
+                const mail = data.mail; // Ajusta según la estructura de la respuesta de tu API
+                console.log(mail);const correo = {
+                    destinatario : mail,
+                    asunto : this.asunto,
+                    cuerpo : this.cuerpo
+                  }
+                  this.authService.enviarCorreo(correo).subscribe(
+                    (respuesta) => {
+                      console.log(respuesta);
+                    },
+                    (error) => {
+                      console.error('Error al enviar el correo', error);
+                      // Puedes manejar el error aquí, por ejemplo, mostrar un mensaje al usuario.
+                    }
+                  );
+
+              },
+              (error) => {
+                console.error('Error al obtener el correo', error);
               }
-            }
-            this.router.navigate(['/correo'], navegationExtras)
+            )
+           // this.router.navigate(['/correo'], navegationExtras)
           },
           error => {
             console.error('Error al actualizar la capacidad:', error);
@@ -132,6 +152,15 @@ export class HomePage {
     } catch (error) {
       console.error('Error al obtener la ubicación:', error);
     }
+  }
+
+  obtenerCorreo(usuario : string){
+    this.authService.obtenerCorreo(usuario).subscribe(
+      data =>{
+        console.log(data.mail)
+      }
+    )
+
   }
 
 }

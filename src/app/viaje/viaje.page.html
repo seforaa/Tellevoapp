@@ -32,6 +32,12 @@
       </ion-col>
       <ion-col>
         <mat-form-field>
+          <mat-label>Ingresa Fecha de Salida</mat-label>
+          <input matInput type="text" [(ngModel)]="viaje.fecha">
+        </mat-form-field>
+      </ion-col>
+      <ion-col>
+        <mat-form-field>
           <mat-label>Ingresar Capacidad</mat-label>
           <input matInput type="number" [(ngModel)]="viaje.capacidad">
         </mat-form-field>
@@ -40,6 +46,15 @@
         <mat-form-field>
           <mat-label>Ingrese Precio</mat-label>
           <input matInput type="number" [(ngModel)]="viaje.precio">
+        </mat-form-field>
+      </ion-col>
+      <ion-col>
+        <mat-form-field>
+          <mat-label>Tipo de Viaje</mat-label>
+          <select matNativeControl [(ngModel)]="viaje.tipo_viaje">
+            <option value= 0>Ida</option>
+            <option value= 1>Vuelta</option>
+          </select>
         </mat-form-field>
       </ion-col>
     </ion-row>

@@ -15,8 +15,11 @@ export class ViajePage implements OnInit {
     duenno: '',
     destino: '',
     salida: '',
+    fecha: '',
     capacidad: null,  // Corregido: Asigna null como número
-    precio: null,  
+    precio: null, 
+    tipo_viaje : 0,
+    estado_viaje : 1
   };
   vacio: boolean=false;
 

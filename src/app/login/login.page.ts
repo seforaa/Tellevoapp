@@ -97,7 +97,10 @@ export class LoginPage {
               
             }
           }
-          this.router.navigate(['/home'], navegationExtras)
+          this.router.navigate(['/home'], navegationExtras).then(() => {
+            console.log('Vista de /home recargada');
+            window.location.reload();
+          });
           console.log("correcto");
           return;
         }

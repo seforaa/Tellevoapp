@@ -6,7 +6,10 @@ import { retry } from 'rxjs/internal/operators/retry';
 interface User {
   user: string;
   password: string;
+  mail : string;
+  tipo_user : number;
 }
+
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +45,10 @@ export class AuthService {
   }
 
   eliminarViaje(patente : any, data:any){
-    return this.http.delete(this.apiURL+'detalle_viaje/'+patente, data);
+    return this.http.put(this.apiURL+'detalle_viaje/'+patente, data);
+  }
+
+  obtenerCorreo(user : string): Observable<User>{
+    return this.http.get<User>(this.apiURL+'detalle_usuarios/'+user);
   }
 }
