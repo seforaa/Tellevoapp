@@ -19,9 +19,9 @@ interface User {
 })
 export class AuthService {
 
-  private apiURL = 'http://127.0.0.1:8000/';//https://f2g52rkf-8000.brs.devtunnels.ms/ 
+  //private apiURL = 'http://127.0.0.1:8000/';//https://f2g52rkf-8000.brs.devtunnels.ms/ 
 
-  //private apiURL = 'https://f2g52rkf-8000.brs.devtunnels.ms/';
+  private apiURL = 'https://f2g52rkf-8000.brs.devtunnels.ms/';
 
   constructor(private http: HttpClient) { }
 
