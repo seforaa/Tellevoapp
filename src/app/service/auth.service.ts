@@ -35,6 +35,10 @@ export class AuthService {
     pipe(retry(2))
   }
 
+  getViaje(patente : string){
+    return this.http.get(this.apiURL+'detalle_viaje/'+patente)
+  }
+
   getViajesTomado():Observable<any> {
     return this.http.get(this.apiURL+'viajeTomado')
   }
@@ -53,6 +57,10 @@ export class AuthService {
   
   deleteViajeTomado(id : number){
     return this.http.delete(this.apiURL+'detalle_viaje_tomado/'+id);
+  }
+
+  deteleViaje(patente : string){
+    return this.http.delete(this.apiURL+'detalle_viaje/'+patente);
   }
 
   enviarCorreo(data : any){

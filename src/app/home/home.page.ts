@@ -231,6 +231,9 @@ export class HomePage {
   cancelarViaje(id : number, patente : string){
     for (const viaje of this.viajes) {
       if (viaje.patente == patente){
+        if (viaje.capacidad == 0){
+          console.log("Viaje no puede ser cancelado");
+        }else{
         viaje.capacidad += 1;
         viaje.estado_viaje = 1;
         if (viaje.tipo_viaje == 0){
@@ -301,6 +304,8 @@ export class HomePage {
           }
         )
       }
+      
+    }
     } 
 
   }
@@ -320,7 +325,12 @@ export class HomePage {
                   this.authService.deleteViajeTomado(id).subscribe(
                     response =>{
                       console.log(response)
-                      window.location.reload()
+                      this.authService.deteleViaje(patente).subscribe(
+                        response =>{
+                          console.log("Viaje Eliminado ", response)
+                          window.location.reload()
+                        }
+                      )
                     }
                   )
                   
@@ -341,7 +351,17 @@ export class HomePage {
                   this.authService.deleteViajeTomado(id).subscribe(
                     response =>{
                       console.log(response)
-                      window.location.reload()
+                      this.authService.deleteViajeTomado(id).subscribe(
+                        response =>{
+                          console.log(response)
+                          this.authService.deteleViaje(patente).subscribe(
+                            response =>{
+                              console.log("Viaje Eliminado ", response)
+                              window.location.reload()
+                            }
+                          )
+                        }
+                      )
                     }
                   )
                   console.log("Usuario Modificado Correctamente ", response)
