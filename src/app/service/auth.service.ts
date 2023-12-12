@@ -51,7 +51,7 @@ export class AuthService {
     return this.http.put(this.apiURL+'detalle_viaje/'+patente, data);
   }  
   
-  putViajeTomado(id : number){
+  deleteViajeTomado(id : number){
     return this.http.delete(this.apiURL+'detalle_viaje_tomado/'+id);
   }
 

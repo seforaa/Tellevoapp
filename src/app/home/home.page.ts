@@ -57,8 +57,6 @@ export class HomePage {
     this.cargaUsuario(this.credentials.username)
     console.log("Hola Mundo")
     console.log(this.state.credentials.username)
-    console.log("Viaje Ida ", this.viaje_ida)
-    console.log("Viaje Vuelta ", this.viaje_vuelta)
   }
 
   cargaUsuario(user : string){
@@ -273,13 +271,28 @@ export class HomePage {
               if (viaje_tomado.id_viaje == id){
                 viaje_tomado.estado = 0;
                 console.log(viaje_tomado.estado);
-                this.authService.putViajeTomado(viaje_tomado.id_viaje).subscribe(
+                this.authService.deleteViajeTomado(viaje_tomado.id_viaje).subscribe(
                   Response =>{
 
                     console.log("Viaje Cancelado ", Response)
                     window.location.reload()
                   }
                 )
+              }else{
+                this.authService.obtenerCorreo(this.credentials.username).subscribe(
+                  (data) =>{
+                    data.viaje_vuelta = 0;
+                    this.authService.putUsuario(data.user, data).subscribe(
+                      response =>{
+                        console.log("Usuario Modificado Correctamente ", response)
+                      },
+                      error => {
+                        console.log("Error al modificar user viaje vuelta ", error)
+                      }
+                    )
+                  }
+                )
+      
               }
             }
           },
@@ -290,6 +303,59 @@ export class HomePage {
       }
     } 
 
+  }
+
+  finalizarViaje(id : number, patente : string){
+    for (const viaje of this.viajes){
+      if (viaje.capacidad !=0){
+        console.log("Viaje no puede ser realizado ya que aun hay capacidad")
+      }else{
+        if (viaje.tipo_viaje == 0){
+          this.authService.obtenerCorreo(this.credentials.username).subscribe(
+            (data) =>{
+              data.viaje_ida = 0;
+              this.authService.putUsuario(data.user, data).subscribe(
+                response =>{
+                  console.log("Usuario Modificado Correctamente ", response)
+                  this.authService.deleteViajeTomado(id).subscribe(
+                    response =>{
+                      console.log(response)
+                      window.location.reload()
+                    }
+                  )
+                  
+                },
+                error => {
+                  console.log("Error al modificar user viaje ida ", error)
+                }
+              )
+            }
+          )
+
+        }else {
+          this.authService.obtenerCorreo(this.credentials.username).subscribe(
+            (data) =>{
+              data.viaje_vuelta = 0;
+              this.authService.putUsuario(data.user, data).subscribe(
+                response =>{
+                  this.authService.deleteViajeTomado(id).subscribe(
+                    response =>{
+                      console.log(response)
+                      window.location.reload()
+                    }
+                  )
+                  console.log("Usuario Modificado Correctamente ", response)
+                },
+                error => {
+                  console.log("Error al modificar user viaje vuelta ", error)
+                }
+              )
+            }
+          )
+
+        }
+      }
+    }
   }
 
   async geolocalizar() {
