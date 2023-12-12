@@ -17,7 +17,7 @@ export class LoginPage {
     password: ""
   }
 
-  tipo_user : any;
+  tipo_user : any;  
 
   hide = true;
   usuarios : any = [];
@@ -26,6 +26,8 @@ export class LoginPage {
   loginerror: boolean = false;
   loginvacio: boolean = false;
   error: boolean = false;
+
+
 
   constructor(private router: Router, private http: HttpClient, private authService: AuthService) { }
 
@@ -94,7 +96,6 @@ export class LoginPage {
             state: {
               credentials: this.credentials,
               tipo_user : usuario.tipo_user
-              
             }
           }
           this.router.navigate(['/home'], navegationExtras).then(() => {

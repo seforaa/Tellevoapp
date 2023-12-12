@@ -22,6 +22,44 @@
               </ion-col>
           </ion-row>
       </div>
+      <div class="ion-text-center">
+        <ion-button id="open-modal" color="success" fill="outline" style="margin: 15px;">Mis Viajes</ion-button>
+      </div>
+        <ion-modal #modal trigger="open-modal" [presentingElement]="presentingElement">
+          <ng-template>
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>Viajes</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button (click)="modal.dismiss()">Cerrar</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content>
+              <ion-list>
+                <div *ngFor="let viaje of viajes_tomados">
+                  <div *ngIf="viaje.usuario == credentials.username">
+                    <ion-card>
+                      <ion-card-content class="ion-text-center">
+                        <ion-card-subtitle>Buen Viaje :)</ion-card-subtitle>
+                        <ion-card-subtitle>Viaje {{ viaje.viaje }}</ion-card-subtitle>
+                        <ion-card-subtitle>ID {{ viaje.id_viaje }}</ion-card-subtitle>
+                        <div>
+                          <div style="float: left;">
+                            <ion-button color="danger" style="margin-bottom: 10px;" (click)="cancelarViaje(viaje.id_viaje, viaje.viaje)">Cancelar</ion-button>
+                          </div>
+                          <div style="float: right;">
+                            <ion-button color="success" style="margin-bottom: 10px;">Finalizado</ion-button>
+                          </div>
+                        </div>
+                      </ion-card-content>
+                    </ion-card>
+                </div>
+              </div>
+              </ion-list>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
       <h1 class="ion-text-center">Viajes de Ida</h1>
       <div *ngIf="viajesVisiblesIda==0" class="ion-text-center" >
       <ion-card>
@@ -45,8 +83,9 @@
                   <input value="{{ viaje.capacidad }}" type="hidden">
                 </ion-card-content>
                 <ion-card-content>
-                  <ion-button fill="outline" *ngIf="viaje.capacidad != 0" style="margin-bottom: 10px;" color="color" (click)="tomarViaje(viaje.patente, credentials.username)" [disabled]="Tomado">Tomar Viaje</ion-button>
+                  <ion-button fill="outline" *ngIf="viaje.capacidad != 0 && viaje_ida == 0" style="margin-bottom: 10px;" color="color" (click)="tomarViaje(viaje.patente, credentials.username)" [disabled]="Tomado">Tomar Viaje</ion-button>
                   <p fill="outline" *ngIf="viaje.capacidad == 0" color="success">Viaje Lleno</p>
+                  <p fill="outline" *ngIf="viaje_ida == 1" color="white">Ya tienes un Viaje de Ida en curso.</p>
                 </ion-card-content>
               </ion-card>
             </div>
@@ -75,8 +114,9 @@
                   <input value="{{ viaje.capacidad }}" type="hidden">
                 </ion-card-content>
                 <ion-card-content>
-                  <ion-button fill="outline" *ngIf="viaje.capacidad != 0" style="margin-bottom: 10px;" color="color" (click)="tomarViaje(viaje.patente, credentials.username)" [disabled]="Tomado">Tomar Viaje</ion-button>
+                  <ion-button fill="outline" *ngIf="viaje.capacidad != 0 && viaje_vuelta == 0" style="margin-bottom: 10px;" color="color" (click)="tomarViaje(viaje.patente, credentials.username)" [disabled]="Tomado">Tomar Viaje</ion-button>
                   <p fill="outline" *ngIf="viaje.capacidad == 0" color="success">Viaje Lleno</p>
+                  <p fill="outline" *ngIf="viaje_vuelta == 1" color="white">Ya tienes un Viaje de Vuelta en curso.</p>
                 </ion-card-content>
               </ion-card>
             </div>

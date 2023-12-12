@@ -37,8 +37,11 @@ describe('ViajePage', () => {
       duenno: '',
       destino: '',
       salida: '',
+      fecha:'',
       capacidad: 0,
       precio: 0,
+      tipo_viaje : 0,
+      estado_viaje : 0,
     };
 
     component.guardarViaje();
